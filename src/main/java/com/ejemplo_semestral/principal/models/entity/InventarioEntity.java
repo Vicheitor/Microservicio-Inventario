@@ -13,6 +13,7 @@ import lombok.Data;
 @Data
 public class InventarioEntity {
     
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     
