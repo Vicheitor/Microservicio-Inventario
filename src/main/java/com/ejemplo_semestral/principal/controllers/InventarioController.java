@@ -1,11 +1,12 @@
 package com.ejemplo_semestral.principal.controllers;
 
-import java.util.List;
+import com.ejemplo_semestral.principal.models.Inventario;
+import com.ejemplo_semestral.principal.service.InventarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.ejemplo_semestral.principal.models.Inventario;
-import com.ejemplo_semestral.principal.service.InventarioService;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/inventario")
@@ -14,23 +15,26 @@ public class InventarioController {
     @Autowired
     private InventarioService inventarioService;
 
-    @GetMapping("/")
+    @GetMapping
     public ResponseEntity<List<Inventario>> listarInventario() {
         return ResponseEntity.ok(inventarioService.listarInventario());
     }
 
-    @PostMapping("/agregar")
+    @PostMapping
     public ResponseEntity<String> agregarStock(@RequestBody Inventario inventario) {
-        return ResponseEntity.ok(inventarioService.agregarStock(inventario));
+        String respuesta = inventarioService.agregarStock(inventario);
+        return ResponseEntity.ok(respuesta);
     }
 
-    @PutMapping("/modificar")
+    @PutMapping
     public ResponseEntity<String> modificarStock(@RequestBody Inventario inventario) {
-        return ResponseEntity.ok(inventarioService.modificarStock(inventario));
+        String respuesta = inventarioService.modificarStock(inventario);
+        return ResponseEntity.ok(respuesta);
     }
 
-    @DeleteMapping("/eliminar/{productoid}")
+    @DeleteMapping("/{productoid}")
     public ResponseEntity<String> eliminarStock(@PathVariable int productoid) {
-        return ResponseEntity.ok(inventarioService.eliminarStock(productoid));
+        String respuesta = inventarioService.eliminarStock(productoid);
+        return ResponseEntity.ok(respuesta);
     }
 }
